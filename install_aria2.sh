@@ -22,6 +22,8 @@ function setting(){
 	mkdir -p /data/aria2
 	mkdir -p /data/aria2/download
 	touch /data/aria2/aria2.session
+	mv aria2-master/* /data/aria2
+	
 	echo "-------------------------------"
 	read -p "设置用户名：" user
 	read -p "设置密码：" pass
