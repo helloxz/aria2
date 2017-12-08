@@ -42,7 +42,7 @@ function setting(){
 	tar -zxvf caddy_v0.10.10_linux_amd64_personal.tar.gz
 	mv /data/aria2/caddy /usr/bin
 	#修改配置
-	sed -i "s/localhost/$1/g" /data/aria2/caddy.conf
+	#sed -i "s/localhost/$1/g" /data/aria2/caddy.conf
 	sed -i "s/username/${user}/g" /data/aria2/caddy.conf
 	sed -i "s/password/${pass}/g" /data/aria2/caddy.conf
 	#放行端口
