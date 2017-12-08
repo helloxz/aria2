@@ -22,7 +22,7 @@ function setting(){
 	mkdir -p /data/aria2
 	mkdir -p /data/aria2/download
 	touch /data/aria2/aria2.session
-	mv aria2-master/* /data/aria2
+	cp aria2.conf caddy.conf /data/aria2
 	
 	echo "-------------------------------"
 	read -p "设置用户名：" user
@@ -32,11 +32,13 @@ function setting(){
 	sed -i "s/rpc-secret=/rpc-secret=${rpc}/g" /data/aria2/aria2.conf
 	#下载yaaw
 	wget -P /data/aria2 https://github.com/binux/yaaw/archive/master.zip
+	cd /data/aria2
 	unzip master.zip
 	mv yaaw-master/* ./
 	
 	#下载caddy server
 	wget -P /data/aria2 http://soft.xiaoz.org/linux/caddy_v0.10.10_linux_amd64_personal.tar.gz
+	cd /data/aria2
 	tar -zxvf caddy_v0.10.10_linux_amd64_personal.tar.gz
 	mv /data/aria2/caddy /usr/bin
 	#修改配置
