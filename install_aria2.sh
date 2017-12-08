@@ -49,15 +49,19 @@ function setting(){
 	chk_firewall
 	#启动服务
 	cd /data/aria2
-	nohup aria2c --conf-path=/data/aria2/aria2.conf &
-	nohup caddy -conf="/data/aria2/caddy.conf" &
+	nohup aria2c --conf-path=/data/aria2/aria2.conf > /data/aria2/aria2.log 2>&1 &
+	nohup caddy -conf="/data/aria2/caddy.conf" > /data/aria2/caddy.log 2>&1 &
 	echo "-------------------------------"
 	echo "#####		安装完成，请牢记以下信息。	#####"
-	echo "访问地址：${osip}:6080"
+	echo "访问地址：http://${osip}:6080"
 	echo "用户名：${user}"
 	echo "密码：${pass}"
 	echo "RPC地址：http://token:${rpc}@${osip}:6800/jsonrpc"
 	echo "-------------------------------"
+	#一点点清理工作
+	rm -rf /data/aria2/*.zip
+	rm -rf /data/aria2/*.tar.gz
+	exit
 }
 
 #自动放行端口
@@ -79,6 +83,7 @@ echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS X64"
 echo "2) Debian or Ubuntu X64"
+echo "q) 退出"
 read -p ":" num
 echo '----------------------------------'
 
@@ -90,14 +95,15 @@ case $num in
 		setting $osip
 		#放行端口
 	;;
-	2) 
-		centos6
-		setting $hostname $osip
-		#放行端口
-		chk_firewall
-		service zabbix-agent start
+	2)
+		echo "老哥，暂时还不支持Debian系统，先等等吧。"
+		exit;
 	;;
-	q) 
+	3)
+		echo '还没写呢'
+		exit;
+	;;
+	q)
 	exit
 	;;
 esac
