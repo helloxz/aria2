@@ -22,7 +22,7 @@ function setting(){
 	mkdir -p /data/aria2
 	mkdir -p /data/aria2/download
 	touch /data/aria2/aria2.session
-	cp aria2.conf caddy.conf /data/aria2
+	cp aria2.conf caddy.conf aria2.sh /data/aria2
 	
 	echo "-------------------------------"
 	read -p "设置用户名：" user
@@ -58,6 +58,8 @@ function setting(){
 	echo "密码：${pass}"
 	echo "RPC地址：http://token:${rpc}@${osip}:6800/jsonrpc"
 	echo "-------------------------------"
+	echo "需要帮助请访问：https://www.xiaoz.me/archives/9694"
+	echo "-------------------------------"
 	#一点点清理工作
 	rm -rf /data/aria2/*.zip
 	rm -rf /data/aria2/*.tar.gz
@@ -79,11 +81,13 @@ function chk_firewall() {
 	fi
 }
 
+echo '#####		欢迎使用一键安装Aria2脚本^_^	#####'
 echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS X64"
 echo "2) Debian or Ubuntu X64"
 echo "q) 退出"
+echo '----------------------------------'
 read -p ":" num
 echo '----------------------------------'
 
@@ -104,6 +108,10 @@ case $num in
 		exit;
 	;;
 	q)
-	exit
+		exit
+	;;
+	*)
+		echo '错误的参数'
+		exit;
 	;;
 esac
