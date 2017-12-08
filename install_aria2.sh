@@ -48,8 +48,9 @@ function setting(){
 	#放行端口
 	chk_firewall
 	#启动服务
-	nohup aria2c --conf-path=/home/soft/aria2/aria2.conf &
-	nohup caddy -conf="/home/soft/aria2/caddy.conf" &
+	cd /data/aria2
+	nohup aria2c --conf-path=/data/aria2/aria2.conf &
+	nohup caddy -conf="/data/aria2/caddy.conf" &
 	echo "-------------------------------"
 	echo "#####		安装完成，请牢记以下信息。	#####"
 	echo "访问地址：${osip}:6080"
@@ -88,7 +89,6 @@ case $num in
 		#设置
 		setting $osip
 		#放行端口
-		chk_firewall
 	;;
 	2) 
 		centos6
