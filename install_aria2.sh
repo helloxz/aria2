@@ -37,7 +37,7 @@ function setting(){
 	mv yaaw-master/* ./
 	
 	#下载caddy server
-	wget -P /usr/bin http://soft.xiaoz.org/linux/caddy.filemanager -O caddy
+	wget http://soft.xiaoz.org/linux/caddy.filemanager -O caddy && mv caddy /usr/bin/
 	chmod +x /usr/bin/caddy
 	#修改配置
 	#sed -i "s/localhost/$1/g" /data/aria2/caddy.conf
