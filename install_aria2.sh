@@ -79,6 +79,58 @@ function setting(){
 	exit
 }
 
+#Aria2低版本设置
+function setting6(){
+	mkdir -p /data/aria2
+	mkdir -p /data/aria2/download
+	touch /data/aria2/aria2.session
+	cp aria2.conf caddy.conf aria2.sh /data/aria2
+	
+	echo "-------------------------------"
+	read -p "设置用户名：" user
+	read -p "设置密码：" pass
+	echo "-------------------------------"
+	sed -i "s/rpc-secret=/#rpc-secret=/g" /data/aria2/aria2.conf
+	sed -i "s/#rpc-user=/rpc-user=${user}/g" /data/aria2/aria2.conf
+	sed -i "s/#rpc-passwd=/rpc-passwd=${pass}/g" /data/aria2/aria2.conf
+	#下载yaaw
+	wget -P /data/aria2 https://github.com/binux/yaaw/archive/master.zip
+	cd /data/aria2
+	unzip master.zip
+	mv yaaw-master/* ./
+	
+	#下载caddy server
+	wget http://soft.xiaoz.org/linux/caddy.filemanager -O caddy && mv caddy /usr/bin/
+	chmod +x /usr/bin/caddy
+	#修改配置
+	#sed -i "s/localhost/$1/g" /data/aria2/caddy.conf
+	sed -i "s/username/${user}/g" /data/aria2/caddy.conf
+	sed -i "s/password/${pass}/g" /data/aria2/caddy.conf
+	#放行端口
+	chk_firewall
+	#启动服务
+	cd /data/aria2
+	nohup aria2c --conf-path=/data/aria2/aria2.conf > /data/aria2/aria2.log 2>&1 &
+	nohup caddy -conf="/data/aria2/caddy.conf" > /data/aria2/caddy.log 2>&1 &
+	echo "-------------------------------"
+	echo "#####		安装完成，请牢记以下信息。	#####"
+	echo "访问地址：http://${osip}:6080"
+	echo "用户名：${user}"
+	echo "密码：${pass}"
+	echo "RPC地址：http://${user}:${pass}@$1:6800/jsonrpc"
+	
+	echo "-------------------------------"
+	echo "需要帮助请访问：https://www.xiaoz.me/archives/9694"
+	echo "-------------------------------"
+	#一点点清理工作
+	rm -rf /data/aria2/*.zip
+	rm -rf /data/aria2/*.tar.gz
+	rm -rf /data/aria2/*.txt
+	rm -rf /data/aria2/*.md
+	rm -rf /data/aria2/yaaw-*
+	exit
+}
+
 #自动放行端口
 function chk_firewall() {
 	if [ -e "/etc/sysconfig/iptables" ]
@@ -116,7 +168,7 @@ case $num in
 	2)
 		#安装aria2
 		centos6
-		setting $osip
+		setting6 $osip
 		exit;
 	;;
 	3)
