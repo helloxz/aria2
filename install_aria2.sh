@@ -4,7 +4,7 @@
 #####		Update:2017-12-07		#####
 
 #获取服务器IP
-osip=$(curl http://https.tn/ip/myip.php?type=onlyip)
+osip=$(curl -4s https://api.ip.sb/ip)
 
 #安装函数
 function centos(){
