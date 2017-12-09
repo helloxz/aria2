@@ -11,6 +11,18 @@ function centos(){
 	yum -y install epel-release
 	yum -y install aria2
 }
+#CentOS 6安装
+function centos6(){
+	wget http://soft.xiaoz.org/linux/nettle-2.2-1.el6.rf.x86_64.rpm
+	wget http://soft.xiaoz.org/linux/nettle-devel-2.2-1.el6.rf.x86_64.rpm
+	wget http://soft.xiaoz.org/linux/gnutls-2.12.23-21.el6.x86_64.rpm
+	wget http://soft.xiaoz.org/linux/aria2-1.16.4-1.el6.rf.x86_64.rpm
+	rpm -ivh nettle-2.2-1.el6.rf.x86_64.rpm
+	rpm -ivh nettle-devel-2.2-1.el6.rf.x86_64.rpm
+	rpm -ivh gnutls-2.12.23-21.el6.x86_64.rpm
+	rpm -ivh aria2-1.16.4-1.el6.rf.x86_64.rpm
+	rm -rf *.rpm
+}
 
 #来不及了，后面再适配Debian吧
 function debian(){
@@ -85,8 +97,9 @@ function chk_firewall() {
 echo '#####		欢迎使用一键安装Aria2脚本^_^	#####'
 echo '----------------------------------'
 echo '请选择系统:'
-echo "1) CentOS X64"
-echo "2) Debian or Ubuntu X64"
+echo "1) CentOS 7 X64"
+echo "2) CentOS 6 X64"
+echo "3) Debian or Ubuntu X64"
 echo "q) 退出"
 echo '----------------------------------'
 read -p ":" num
@@ -101,15 +114,17 @@ case $num in
 		#放行端口
 	;;
 	2)
-		echo "老哥，暂时还不支持Debian系统，先等等吧。"
+		#安装aria2
+		centos6
+		setting $osip
 		exit;
 	;;
 	3)
-		echo '还没写呢'
+		echo '先等等'
 		exit;
 	;;
 	q)
-		exit
+		exit;
 	;;
 	*)
 		echo '错误的参数'
