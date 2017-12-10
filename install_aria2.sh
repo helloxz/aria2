@@ -1,7 +1,7 @@
 #!/bin/bash
 #####		一键安装aria2 + yaaw	#####
 #####		Author:xiaoz.me			#####
-#####		Update:2017-12-07		#####
+#####		Update:2017-12-10		#####
 
 #获取服务器IP
 osip=$(curl -4s https://api.ip.sb/ip)
@@ -76,7 +76,6 @@ function setting(){
 	rm -rf /data/aria2/*.txt
 	rm -rf /data/aria2/*.md
 	rm -rf /data/aria2/yaaw-*
-	exit
 }
 
 #Aria2低版本设置
@@ -128,7 +127,6 @@ function setting6(){
 	rm -rf /data/aria2/*.txt
 	rm -rf /data/aria2/*.md
 	rm -rf /data/aria2/yaaw-*
-	exit
 }
 
 #自动放行端口
@@ -163,26 +161,26 @@ case $num in
 		centos
 		#设置
 		setting $osip
-		#放行端口
+		exit
 	;;
 	2)
 		#安装aria2
 		centos6
 		setting6 $osip
-		exit;
+		exit
 	;;
 	3)
 		debian
 		setting $osip
 		echo "温馨提示：Debian/Ubuntu用户若无法访问，需要放行6080/6800端口或关闭防火墙！"
 		echo '----------------------------------'
-		exit;
+		exit
 	;;
 	q)
-		exit;
+		exit
 	;;
 	*)
 		echo '错误的参数'
-		exit;
+		exit
 	;;
 esac
