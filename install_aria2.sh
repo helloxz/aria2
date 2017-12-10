@@ -149,7 +149,7 @@ echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS 7 X64"
 echo "2) CentOS 6 X64"
-echo "3) Debian 8+ X64 or Ubuntu 14+ X64"
+echo "3) Debian 8+ X64 or Ubuntu 16+ X64"
 echo "q) 退出"
 echo '----------------------------------'
 read -p ":" num
