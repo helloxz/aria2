@@ -36,6 +36,8 @@ unzip master.zip && cd aria2-master && chmod u+x *.sh && ./install_aria2.sh
 /data/aria2/aria2.sh stop
 #重启
 /data/aria2/aria2.sh restart
+#卸载
+cd aria2-master && ./uninstall.sh
 #Caddy server配置文件
 /data/aria2/caddy.conf
 #Aria2配置文件
