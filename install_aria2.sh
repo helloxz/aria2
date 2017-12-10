@@ -26,7 +26,7 @@ function centos6(){
 
 #来不及了，后面再适配Debian吧
 function debian(){
-	apt-get install aria2
+	apt-get -y install aria2
 }
 
 #创建目录与配置
@@ -151,7 +151,7 @@ echo '----------------------------------'
 echo '请选择系统:'
 echo "1) CentOS 7 X64"
 echo "2) CentOS 6 X64"
-echo "3) Debian or Ubuntu X64"
+echo "3) Debian 8+ X64 or Ubuntu 14+ X64"
 echo "q) 退出"
 echo '----------------------------------'
 read -p ":" num
@@ -172,7 +172,10 @@ case $num in
 		exit;
 	;;
 	3)
-		echo '先等等'
+		debian
+		setting $osip
+		echo "温馨提示：Debian/Ubuntu用户若无法访问，需要放行6080/6800端口或关闭防火墙！"
+		echo '----------------------------------'
 		exit;
 	;;
 	q)
