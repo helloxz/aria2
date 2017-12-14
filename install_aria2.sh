@@ -88,11 +88,13 @@ function chk_firewall() {
 	then
 		iptables -I INPUT -p tcp --dport 6080 -j ACCEPT
 		iptables -I INPUT -p tcp --dport 6800 -j ACCEPT
+		iptables -I INPUT -p tcp --dport 51413 -j ACCEPT
 		service iptables save
 		service iptables restart
 	else
 		firewall-cmd --zone=public --add-port=6080/tcp --permanent
 		firewall-cmd --zone=public --add-port=6800/tcp --permanent
+		firewall-cmd --zone=public --add-port=51413/tcp --permanent
 		firewall-cmd --reload
 	fi
 }
@@ -125,7 +127,7 @@ case $num in
 	3)
 		debian
 		setting $osip
-		echo "温馨提示：Debian/Ubuntu用户若无法访问，需要放行6080/6800端口或关闭防火墙！"
+		echo "温馨提示：Debian/Ubuntu用户若无法访问，需要放行 6080/6800/51413 端口或关闭防火墙！"
 		echo '----------------------------------'
 		exit
 	;;
